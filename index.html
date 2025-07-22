@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <title>Exemplo de HTML com Imagens</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diana Reel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .error {
+      color: red;
+      font-size: 1.5rem;
+      margin-top: 100px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Galeria de Imagens</h1>
-    <img src="1.jpg" alt="Imagem 1">
-    <img src="2.jpg" alt="Imagem 2">
-    <img src="3.jpg" alt="Imagem 3">
-    <p>Você pode adicionar quantas imagens quiser!</p>
+
+  <div id="content"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+    // Define aqui o token que queres usar
+    const TOKEN_VALIDO = "abc123";
+
+    if (token !== TOKEN_VALIDO) {
+      document.getElementById("content").innerHTML = `
+        <div class="error">⚠️ Acesso não autorizado</div>
+      `;
+    } else {
+      document.getElementById("content").innerHTML = `
+        <h1>Diana</h1>
+        <div class="gallery">
+          <img src="1.jpg" alt="Foto 1">
+          <img src="2.jpg" alt="Foto 2">
+          <img src="3.jpg" alt="Foto 3">
+        </div>
+      `;
+    }
+  </script>
+
 </body>
 </html>
