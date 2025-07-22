@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diana Reel - Tudo Bem</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .error {
+      color: red;
+      font-size: 1.5rem;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="content"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const TOKEN_VALIDO = "abc123";
+
+    // Lista de imagens na pasta "tudo bem"
+    const imagens = [
+      "1.jpg", "2.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg",
+      "15.jpg", "16.jpg", "17.jpg", "18.jpg", "20.jpg", "21.jpg"
+    ];
+
+    if (token !== TOKEN_VALIDO) {
+      document.getElementById("content").innerHTML = `
+        <div class="error">⚠️ Acesso não autorizado</div>
+      `;
+    } else {
+      let galleryHtml = '<h1>Diana</h1><div class="gallery">';
+      imagens.forEach(nome => {
+        galleryHtml += `<img src="${nome}" alt="Foto ${nome}">`;
+      });
+      galleryHtml += '</div>';
+      document.getElementById("content").innerHTML = galleryHtml;
+    }
+  </script>
+
+</body>
+</html>
