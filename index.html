@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Diana Reel</title>
+  <title>Diana Reel - Online Aleatórias</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,57 +13,54 @@
       padding: 20px;
       text-align: center;
     }
-
     h1 {
       margin-bottom: 40px;
     }
-
     .gallery {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 30px;
     }
-
     img {
       max-width: 90%;
       height: auto;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
-
-    .error {
-      color: red;
-      font-size: 1.5rem;
-      margin-top: 100px;
-    }
   </style>
 </head>
 <body>
 
-  <div id="content"></div>
+  <h1>Diana</h1>
+  <div class="gallery" id="gallery"></div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    // Lista de exemplos de imagens online (Unsplash)
+    const imagensOnline = [
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900",
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=900",
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=900",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900",
+      "https://images.unsplash.com/photo-1465101178521-c1a2b0b0a0b2?w=900",
+      "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?w=900",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"
+    ];
 
-    // Define aqui o token que queres usar
-    const TOKEN_VALIDO = "abc123";
-
-    if (token !== TOKEN_VALIDO) {
-      document.getElementById("content").innerHTML = `
-        <div class="error">⚠️ Acesso não autorizado</div>
-      `;
-    } else {
-      document.getElementById("content").innerHTML = `
-        <h1>Diana</h1>
-        <div class="gallery">
-          <img src="1.jpg" alt="Foto 1">
-          <img src="2.jpg" alt="Foto 2">
-          <img src="3.jpg" alt="Foto 3">
-        </div>
-      `;
+    // Função para buscar 3 imagens aleatórias
+    function getRandomImages(arr, num) {
+      const shuffled = arr.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, num);
     }
+
+    const aleatorias = getRandomImages(imagensOnline, 3);
+
+    let galleryHtml = '';
+    aleatorias.forEach(url => {
+      galleryHtml += `<img src="${url}" alt="Foto aleatória">`;
+    });
+
+    document.getElementById("gallery").innerHTML = galleryHtml;
   </script>
 
 </body>
