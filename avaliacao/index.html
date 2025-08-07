@@ -53,14 +53,19 @@
   padding: 20px;
 "></div>
 <div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
-  <div id="reportagemWrapper"
-       style="position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9;
-              background: #000; border-radius: 12px;
-              display: flex; align-items: center; justify-content: center;
-              box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
-    <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Ver Reportagem</span>
-  </div>
+  <a href="https://onedrive.live.com/?photosData=%2Fshare%2F3B24DCE14DCF98F6%21sbf5277b6f18a4e7b9bca0e6b0032857d%3Fithint%3Dvideo%26e%3Dqm3tRL%26migratedtospo%3Dtrue&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy8zYjI0ZGNlMTRkY2Y5OGY2L0ViWjNVci1LOFh0T204b09hd0F5aFgwQm8wOEQyY1QzWWdGQTdxbjFmeWtTSlE_YT1xbTN0Ukw&view=8" 
+     target="_blank" 
+     style="text-decoration: none;">
+    <div id="reportagemWrapper"
+         style="position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9;
+                background: #000; border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
+                box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
+      <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Ver Reportagem</span>
+    </div>
+  </a>
 </div>
+
 
   <!-- Modal -->
   <div id="imgModal" class="modal">
@@ -85,7 +90,7 @@ const wrapper = document.getElementById("reportagemWrapper");
 wrapper.addEventListener("click", () => {
   wrapper.innerHTML = `
     <video controls autoplay style="width: 100%; height: 100%; border-radius: 12px;">
-      <source src="AVALIACAO.MP4" type="video/mp4">
+      <source src="https://1drv.ms/v/c/3b24dce14dcf98f6/EbZ3Ur-K8XtOm8oOawAyhX0Bo08D2cT3YgFA7qn1fykSJQ?e=qm3tRL" type="video/mp4">
       O seu navegador não suporta vídeo HTML5.
     </video>
   `;
