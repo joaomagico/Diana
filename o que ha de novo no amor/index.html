@@ -1,1 +1,151 @@
-a
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - Salto de fé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS correto -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../token-check.js"></script>
+</head>
+
+
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+<!-- Vídeo -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre o Filme</h2>
+    <p><strong>Título:</strong> O Que Há de Novo no Amor</p>
+    <p><strong>Realizador:</strong> Rui Santos , Tiago Nunes , Hugo Alves , Hugo Martins , Patrícia Raposo , Mónica Santana Baptista</p>
+    <p><strong>Ano:</strong> 2009</p>
+    <p><strong>Duração:</strong> 111 minutos</p>
+    <p><strong>Sinopse:</strong> Seis amigos juntam-se todas as noites numa cave para fazer música. Mas durante o dia, para as coisas da vida, não há ensaios. Cada tentativa deixa marcas. 
+A Rita deixou o Ricardo, foi encontrada pelo Rafael, mas ainda se sente perdida. O Eduardo achava que já não gostava da Maria, mas depois do que fez já não pode voltar atrás. O João não tem coragem para se separar da namorada e o seu refúgio é a canção que está a escrever para a Inês. O Marco luta pelo amor doutro rapaz, mas não se ilude com fantasias. O Samuel acredita no amor eterno, mas algo não está bem porque os amigos não sabem dele. A Inês, para se sentir segura, gosta de experimentar e agora anda a ver o que dá com o João. 
+A banda começa a desmembrar-se.</p>
+    <p><strong>Elenco:</strong> Nuno Casanovas , João Cajuda , David Cabecinha , Sónia Balacó , Joana Metrass , Ângelo Rodrigues, Joana Santos, Diana Nicolau </p>
+  </div>
+  <!-- Vídeo -->
+  <div style="flex: 1 1 360px; max-width: 720px;">
+    <video controls poster="capa.jpg" style="width: 100%; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);">
+      <source src="O QUE HA DE NOVO NO AMOR.MP4" type="video/mp4">
+      O seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+  
+ </div>
+    <!-- Fotografias -->
+    <div class="section">
+      <div id="galeria" style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+"></div>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+<!-- Placeholder de texto com fundo preto para o vídeo da reportagem -->
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  
+  </div>
+
+
+  <script>
+    // Aplica o fundo dinamicamente com base na imagem "capa" da pasta atual
+  document.body.style.backgroundImage = "url('capa.jpg')";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  document.body.style.backgroundAttachment = "fixed";
+
+const imagens = Array.from({ length: 3}, (_, i) => `${i + 1}.png`);
+const galeria = document.getElementById("galeria");
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImage");
+let currentIndex = 0;
+
+imagens.forEach((nome, i) => {
+  const img = document.createElement("img");
+  img.src = nome;
+  img.alt = nome;
+  img.onclick = () => openModal(i);
+  img.style.width = "100%";
+  img.style.borderRadius = "10px";
+  img.style.cursor = "pointer";
+  img.style.boxShadow = "0 0 15px rgba(0,0,0,0.4)";
+  galeria.appendChild(img);
+});
+
+
+  function openModal(index) {
+    currentIndex = index;
+    modal.style.display = "flex";
+    modalImg.src = imagens[currentIndex];
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "Escape") {
+        closeModal();
+      }
+    }
+  });
+
+  // Suporte a swipe (móvel)
+  let startX = 0;
+  let endX = 0;
+
+  modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  modal.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = startX - endX;
+    const threshold = 50; // mínimo necessário para considerar swipe
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // swipe para a esquerda → próxima imagem
+        currentIndex = (currentIndex + 1) % imagens.length;
+      } else {
+        // swipe para a direita → imagem anterior
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+      }
+      modalImg.src = imagens[currentIndex];
+    }
+  }
+
+  
+</script>
+
+</body>
+</html>
