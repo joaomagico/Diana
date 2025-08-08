@@ -1,0 +1,65 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - Swing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS correto -->
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../../token-check.js"></script>
+</head>
+
+
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+<!-- Vídeo -->
+  <div style="flex: 1 1 360px; max-width: 720px;">
+    <video controls poster="capa.png" style="width: 100%; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);">
+      <source src="swing.mp4" type="video/mp4">
+      O seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+  <!-- Informação -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre a peça</h2>
+    <p><strong>Título:</strong> Swing</p>
+    <p><strong>Encenação: </strong> Henrique Dias, Adriano Luz</p>
+    <p><strong>Ano: </strong> 2025</p>
+    <p><strong>Sinopse:</strong> Nuno (Diogo Morgado) e Sofia (Diana Nicolau) são um casal feliz e bem-sucedido. Têm um filho, um labrador, dois Mercedes e um T3 no Parque nas Nações. Têm tudo, menos uma vida sexual excitante. Ao fim de anos de casamento e vidas profissionais exigentes, o amor continua, mas a excitação sexual desapareceu. Para recuperar a chama que se apagou, decidem tentar o swing e respondem ao anúncio online dos “Reis do Swing”. Renato (Manuel Marques) e Márcia (Susana Blazer), donos de um minimercado em Fernão Ferro e praticantes federados de swing desde 2003 são os “Reis do Swing”. O que irá acontecer neste encontro? Será que vai haver realmente troca de casais? Será que todos conseguem seguir com a experiência? Será, será, será???
+</p>
+	<p><strong>Elenco: </strong> Diana Nicolau, Susana Blazer, Diogo Morgado, Manuel Marquês</p>
+  </div>
+  
+   
+ </div>
+    <!-- Fotografias -->
+    <div class="section">
+      <div class="fotos" id="galeria"></div>
+    </div>
+
+ </div>
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+
+  <script>
+  
+setBackground("capa.png");
+setGaleria(55,"jpg");
+  
+</script>
+
+</body>
+</html>
