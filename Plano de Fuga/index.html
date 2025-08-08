@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - Plano de Fuga</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+ <!-- CSS correto -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../token-check.js"></script>
+</head>
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+
+  <!-- Informação -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre o Filme</h2>
+    <p><strong>Título:</strong> Plano de Fuga</p>
+    <p><strong>Realizador:</strong> Ruben Do Valle, Catarina Rodrigues</p>
+    <p><strong>Ano:</strong> 2016</p>
+    <p><strong>Duração:</strong> 3 episódios</p>
+    <p><strong>Sinopse:</strong>A história começa há cinco anos, numa festa de finalistas do secundário, quando cinco amigos são indiciados como suspeitos de assassinato de um colega mas o processo foi arquivado por falta de provas. Agora, através de uma pista anónima, surgiram novos dados e o caso volta a ser investigado</p>
+    <p><strong>Elenco:</strong> Miguel Borges, Diana Nicolau, Paulo Pinto</p>
+  </div>
+  <!-- Vídeo -->
+  <div style="flex: 1 1 360px; max-width: 720px;">
+    <video controls poster="capa.png" style="width: 100%; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);">
+      <source src="Plano de fuga.mp4" type="video/mp4">
+      O seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+
+</div>
+   
+
+
+    <!-- Fotografias -->
+    <div class="section">
+      <div id="galeria" style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+"></div>
+
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+<!-- Placeholder de texto com fundo preto para o vídeo da reportagem -->
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  
+  </div>
+
+  
+
+  <script>
+      // Aplica o fundo dinamicamente com base na imagem "capa" da pasta atual
+  document.body.style.backgroundImage = "url('capa.png')";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  document.body.style.backgroundAttachment = "fixed";
+  
+ const imagens = Array.from({ length: 29}, (_, i) => `${i + 1}.png`);
+const galeria = document.getElementById("galeria");
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImage");
+let currentIndex = 0;
+
+imagens.forEach((nome, i) => {
+  const img = document.createElement("img");
+  img.src = nome;
+  img.alt = nome;
+  img.onclick = () => openModal(i);
+  img.style.width = "100%";
+  img.style.borderRadius = "10px";
+  img.style.cursor = "pointer";
+  img.style.boxShadow = "0 0 15px rgba(0,0,0,0.4)";
+  galeria.appendChild(img);
+});
+
+
+  function openModal(index) {
+    currentIndex = index;
+    modal.style.display = "flex";
+    modalImg.src = imagens[currentIndex];
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "Escape") {
+        closeModal();
+      }
+    }
+  });
+
+  // Suporte a swipe (móvel)
+  let startX = 0;
+  let endX = 0;
+
+  modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  modal.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = startX - endX;
+    const threshold = 50; // mínimo necessário para considerar swipe
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // swipe para a esquerda → próxima imagem
+        currentIndex = (currentIndex + 1) % imagens.length;
+      } else {
+        // swipe para a direita → imagem anterior
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+      }
+      modalImg.src = imagens[currentIndex];
+    }
+  }
+
+</script>
+
+</body>
+</html>
