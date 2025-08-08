@@ -1,0 +1,73 @@
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - Uma casa de Bonecas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS correto -->
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../../token-check.js"></script>
+</head>
+
+
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+<!-- Vídeo -->
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  <video controls poster="capa.jpg"controls style="width: 100%; max-width: 720px; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);">
+    <source src="uma casa de bonecas.mp4" type="video/mp4">
+    O seu navegador não suporta vídeo HTML5.
+  </video>
+</div>
+
+  <!-- Informação -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre a peça</h2>
+    <p><strong>Título:</strong> Uma casa de Bonecas</p>
+    <p><strong>Encenação: </strong> João de Brito</p>
+    <p><strong>Ano: </strong> 2021</p>
+    <p><strong>Sinopse:</strong>  Uma Casa de Bonecas, escrita em 1879 pelo autor norueguês Henrik Ibsen, é uma das mais importantes peças da história da literatura, unanimemente considerada como o texto que dá origem ao drama moderno. A acção acompanha a relação do casal Helmer, principalmente a “viagem” interior que a mulher, Nora, percorre ao longo dos três actos e que a faz tomar consciência que a aparência da perfeição e da felicidade não são a perfeição e a felicidade. Peça feminista, psicológica, revolucionária, são muitos os adjectivos que podem classificar Uma Casa de Bonecas, mas talvez a forma mais simples de a descrever seja aquela que o próprio autor usou, dizendo que a escreveu: «não como uma peça de propaganda mas sim de verdades universais sobre a identidade humana».</p>
+	<p><strong>Elenco: </strong> Bruno Bernardo, Diana Nicolau, Inês Ferreira da Silva, José Mata, Luís Lobão e Madalena Almeida</p>
+		<!-- PDF para download -->
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  <a href="Folha-Sala-Uma-Casa-de-Bonecas.pdf" download
+     style="padding: 15px 25px; background: #ffcc66; color: #000; font-weight: 600;
+            text-decoration: none; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.3);">
+    📄 Bruxura Completa
+  </a>
+</div>
+  </div>
+  
+ </div>
+    <!-- Fotografias -->
+    <div class="section">
+      <div class="fotos" id="galeria"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+
+  <script>
+
+setBackground("capa.jpg");
+setGaleria(15,"jpg");
+
+  
+</script>
+
+</body>
+</html>
