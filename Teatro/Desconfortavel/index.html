@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- CSS correto -->
-  <link rel="stylesheet" href="https://joaomagico.github.io/Diana/styles.css">
+  <link rel="stylesheet" href="../../styles.css">
 
   <!-- Validação do token -->
   <script src="../../token-check.js"></script>
@@ -17,9 +17,6 @@
 <body>
   <div class="overlay">
     <h1></h1>
-<a href="https://1drv.ms/v/c/3b24dce14dcf98f6/EUKCtjN790xBgpH7ivVFOwsBTMJy3iQKcTJDc6s5xAAEJw?e=GJerzF" target="_blank" style="padding: 10px 20px; background-color: #0078D4; color: white; text-decoration: none; border-radius: 5px;">
-  Ver vídeo
-</a>
 
     <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
 <div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
@@ -33,28 +30,24 @@
   </div>
   <!-- Informação -->
   <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
-    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre o Filme</h2>
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre a peça</h2>
     <p><strong>Título:</strong> Desconfortável</p>
-    <p><strong>Realizador: </strong> Diana Nicolau</p>
+    <p><strong>Encenação: </strong> Diana Nicolau</p>
     <p><strong>Ano: </strong> 2024</p>
-    <p><strong>Sinopse:</strong>A miúda, A mulher, A atriz, A filha, A mãe, A namorada, A ex-namorada, A órfã, A amiga, A ex-amiga, A fugitiva, A crente, A cética, A corajosa, A cobarde, A deprimida, A extrovertida, A egoísta, A altruísta, A grata, A ingrata, A confiante, A impostora, A que quer estar aqui, A que não quer estar, aqui(...)
-O que têm todas elas em comum? São a mesma pessoa. E dentro dela cabem muitas outras com os seus medos, angústias, conquistas, paixões e dúvidas.
-Num espaço onde a regra principal é o desconforto, a proposta é que o pratiquemos em conjunto. Através de várias histórias contadas por alguém que nos pode servir tanto de guia como de espelho, vamos pensando passado, presente e futuro. O nosso, o do mundo e o dos nossos.
-É desconfortável crescer. E está tudo a crescer à nossa volta, a uma velocidade desconcertante e mais rápido do que gostaríamos. É preciso sermos como as lagostas, que largam as suas ‘carapaças’ quando se sentem apertadas e desconfortáveis e produzem novas e ajustadas. Até essas se tornarem desconfortáveis novamente e repetir o processo. É no desconforto que se cresce. Mas como? E para quê?
-É reconfortante saber que não nos andamos a questionar sozinhos, e curioso como, num mundo com infinitas perguntas, andamos muitas vezes todos à procura das mesmas respostas. </p>
+    <p><strong>Sinopse: </strong> Num espaço onde a regra principal é o desconforto, a proposta é que o pratiquemos em conjunto. Através de várias histórias contadas por alguém que nos pode servir tanto de guia como de espelho, vamos pensando passado, presente e futuro. O nosso, o do mundo e o do nossos.
+
+É desconfortável crescer. E tudo à nossa volta cresce a uma velocidade desconcertante e mais rápido do que gostaríamos. Quando o exoesqueleto da lagosta se torna demasiado apertado e desconfortável, ela rompe-o, e vulneravelmente exposta aos predadores, produz uma nova carapaça ajustada ao seu tamanho. Quando esta se torna novamente desconfortável, o processo repete-se.
+
+É no desconforto que se cresce. Mas como? E para quê? É reconfortante saber que não nos andamos a questionar sozinhos, e curioso que, num mundo com infinitas perguntas, andemos muitas vezes todos à procura das mesmas respostas.
+
+</p>
 	<p><strong>Elenco: </strong> Diana Nicolau</p>
   </div>
   
  </div>
     <!-- Fotografias -->
     <div class="section">
-      <div id="galeria" style="
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  padding: 20px;
-"></div>
-
+      <div class="fotos" id="galeria"></div>
     </div>
   </div>
 
@@ -64,109 +57,17 @@ Num espaço onde a regra principal é o desconforto, a proposta é que o pratiqu
     <img class="modal-content" id="modalImage">
   </div>
 <!-- Placeholder de texto com fundo preto para o vídeo da reportagem -->
-<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
-  <div id="Entrevista"
-       style="position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9;
-              background: #000; border-radius: 12px;
-              display: flex; align-items: center; justify-content: center;
-              box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
-    <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Entrevista</span>
-  </div>
-  </div>
+<div class="section flex-center">
+  <a class="video-card" href="https://1drv.ms/v/c/3b24dce14dcf98f6/EUKCtjN790xBgpH7ivVFOwsBTMJy3iQKcTJDc6s5xAAEJw?e=97EukY" target="_blank">
+    <span>📽️ Entrevista</span>
+  </a>
+</div>
 
 
   <script>
-    // Aplica o fundo dinamicamente com base na imagem "capa" da pasta atual
-  document.body.style.backgroundImage = "url('capa.jpg')";
-  document.body.style.backgroundSize = "cover";
-  document.body.style.backgroundPosition = "center";
-  document.body.style.backgroundAttachment = "fixed";
-
-// Substitui o placeholder pela tag <video> ao clicar
-const wrapper = document.getElementById("Entrevista");
-wrapper.addEventListener("click", () => {
-  wrapper.innerHTML = `
-    <video controls autoplay style="width: 100%; height: 100%; border-radius: 12px;">
-      <source src="Entrevista Desconfortável.mp4" type="video/mp4">
-      O seu navegador não suporta vídeo HTML5.
-    </video>
-  `;
-});
-
-
-
-const imagens = Array.from({ length: 44 }, (_, i) => `${i + 1}.jpg`);
-const galeria = document.getElementById("galeria");
-const modal = document.getElementById("imgModal");
-const modalImg = document.getElementById("modalImage");
-let currentIndex = 0;
-
-imagens.forEach((nome, i) => {
-  const img = document.createElement("img");
-  img.src = nome;
-  img.alt = nome;
-  img.onclick = () => openModal(i);
-  img.style.width = "100%";
-  img.style.borderRadius = "10px";
-  img.style.cursor = "pointer";
-  img.style.boxShadow = "0 0 15px rgba(0,0,0,0.4)";
-  galeria.appendChild(img);
-});
-
-
-  function openModal(index) {
-    currentIndex = index;
-    modal.style.display = "flex";
-    modalImg.src = imagens[currentIndex];
-  }
-
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (modal.style.display === "flex") {
-      if (e.key === "ArrowLeft") {
-        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
-        modalImg.src = imagens[currentIndex];
-      } else if (e.key === "ArrowRight") {
-        currentIndex = (currentIndex + 1) % imagens.length;
-        modalImg.src = imagens[currentIndex];
-      } else if (e.key === "Escape") {
-        closeModal();
-      }
-    }
-  });
-
-  // Suporte a swipe (móvel)
-  let startX = 0;
-  let endX = 0;
-
-  modal.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
-
-  modal.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
-  });
-
-  function handleSwipe() {
-    const diff = startX - endX;
-    const threshold = 50; // mínimo necessário para considerar swipe
-
-    if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // swipe para a esquerda → próxima imagem
-        currentIndex = (currentIndex + 1) % imagens.length;
-      } else {
-        // swipe para a direita → imagem anterior
-        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
-      }
-      modalImg.src = imagens[currentIndex];
-    }
-  }
-
+  
+setBackground("capa.jpg");
+setGaleria(44,"jpg");
   
 </script>
 
