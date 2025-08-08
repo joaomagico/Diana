@@ -1,1 +1,196 @@
-sad
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - E amanhã</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS correto -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../token-check.js"></script>
+</head>
+
+
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+
+  <!-- Informação -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre o Filme</h2>
+    <p><strong>Título:</strong> E amanhã</p>
+    <p><strong>Realizador: </strong> Bruno Cativo</p>
+    <p><strong>Ano: </strong> 2011</p>
+    <p><strong>Duração:</strong> 90 minutos</p>
+    <p><strong>Sinopse:</strong> Miguel é um prematuro e jovem escritor, estudante de cinema. Aos 21 anos escreve o seu primeiro best-seller.
+Maria é uma jovem estudante de psicologia, que nasceu numa família abastada.
+A fama humilde de Miguel e a procura do estrelato por parte de Maria tornam a sua relação amorosa numa história sem fim e num amor que não é assumidamente par.
+Os valores humanos e o silêncio criativo levam Miguel a desistir de tudo, desaparecendo durante três anos numa incessante procura do verdadeiro sentido da vida. Sempre de olhos postos na crença de que dias melhores virão, no acreditar de uma felicidade que há muito não existe e de que um dia irá morrer feliz.
+E amanhã?</p>
+	<p><strong>Elenco: </strong> 
+Pedro Barroso, Lena Jesus, Diana Nicolau </p>
+  </div>
+  <!-- Vídeo -->
+  <div style="flex: 1 1 360px; max-width: 720px;">
+    <video controls poster="capa2.jpg" style="width: 100%; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);">
+      <source src="Teaser.mp4" type="video/mp4">
+      O seu navegador não suporta vídeo HTML5.
+    </video>
+  </div>
+ 
+
+
+
+
+   <!-- Fotografias -->
+    <div class="section">
+      <div id="galeria" style="
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+"></div>
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  <div id="promo"
+       style="position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9;
+              background: #000; border-radius: 12px;
+              display: flex; align-items: center; justify-content: center;
+              box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
+    <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Promo</span>
+  </div>
+  </div>
+<div class="section flex-center">
+  <a class="video-card" href="https://1drv.ms/v/c/3b24dce14dcf98f6/EfyX-RozBb9BuBZD-GqyDicBxlmzfQ2TtniZ52ToJB5r-A?e=vp6Q8F" target="_blank">
+    <span>📽️ Filme completo</span>
+  </a>
+</div>
+<div class="section flex-center">
+  <a class="video-card" href="https://1drv.ms/v/c/3b24dce14dcf98f6/ET6UX2Nrh9JCqHVZjfF51rMBjDj1gCch0216VkfdX5AhPA?e=jy4skj" target="_blank">
+    <span>📽️ Making of</span>
+  </a>
+</div>
+<div class="section flex-center">
+  <a class="video-card" href="https://1drv.ms/v/c/3b24dce14dcf98f6/ESs_w8nBiFNBsAaVf3HqNZAB1v04jhIb3Eyh3ou9zFIdnA?e=gqP9rU" target="_blank">
+    <span>📽️ Entrevista Bruno Cativo</span>
+  </a>
+</div>
+
+
+</div>
+
+
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+<!-- Placeholder de texto com fundo preto para o vídeo da reportagem -->
+<div class="section" style="display: flex; justify-content: center; margin-top: 40px;">
+  
+  </div>
+
+
+  <script>
+    // Aplica o fundo dinamicamente com base na imagem "capa" da pasta atual
+  document.body.style.backgroundImage = "url('capa1.jpg')";
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  document.body.style.backgroundAttachment = "fixed";
+
+
+
+const wrapper2 = document.getElementById("promo");
+wrapper2.addEventListener("click", () => {
+  wrapper2.innerHTML = `
+    <video controls autoplay style="width: 100%; height: 100%; border-radius: 12px;">
+      <source src="promo.mp4" type="video/mp4">
+      O seu navegador não suporta vídeo HTML5.
+    </video>
+  `;
+});
+
+
+ const imagens = Array.from({ length:4}, (_, i) => `${i + 1}.png`);
+const galeria = document.getElementById("galeria");
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImage");
+let currentIndex = 0;
+
+imagens.forEach((nome, i) => {
+  const img = document.createElement("img");
+  img.src = nome;
+  img.alt = nome;
+  img.onclick = () => openModal(i);
+  img.style.width = "100%";
+  img.style.borderRadius = "10px";
+  img.style.cursor = "pointer";
+  img.style.boxShadow = "0 0 15px rgba(0,0,0,0.4)";
+  galeria.appendChild(img);
+});
+
+
+  function openModal(index) {
+    currentIndex = index;
+    modal.style.display = "flex";
+    modalImg.src = imagens[currentIndex];
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (modal.style.display === "flex") {
+      if (e.key === "ArrowLeft") {
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "ArrowRight") {
+        currentIndex = (currentIndex + 1) % imagens.length;
+        modalImg.src = imagens[currentIndex];
+      } else if (e.key === "Escape") {
+        closeModal();
+      }
+    }
+  });
+
+  // Suporte a swipe (móvel)
+  let startX = 0;
+  let endX = 0;
+
+  modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  modal.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = startX - endX;
+    const threshold = 50; // mínimo necessário para considerar swipe
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // swipe para a esquerda → próxima imagem
+        currentIndex = (currentIndex + 1) % imagens.length;
+      } else {
+        // swipe para a direita → imagem anterior
+        currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+      }
+      modalImg.src = imagens[currentIndex];
+    }
+  }
+
+</script>
+
+</body>
+</html>
