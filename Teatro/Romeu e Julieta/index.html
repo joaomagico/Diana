@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Diana Nicolau - Romeu e Julieta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+ <!-- CSS correto -->
+  <link rel="stylesheet" href="../../styles.css">
+
+  <!-- Validação do token -->
+  <script src="../../token-check.js"></script>
+</head>
+<body>
+  <div class="overlay">
+    <h1></h1>
+
+    <!-- Vídeo --><!-- Vídeo + Info lado a lado -->
+<div class="section" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: flex-start;">
+
+<!-- Vídeo -->
+  
+
+
+  <!-- Informação -->
+  <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
+  
+    <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre a peça
+	<div style="flex: 1 1 360px; max-width: 720px;">
+    <img src="capa.png" style="width: 50%; border-radius: 12px; box-shadow: 0 0 25px rgba(0,0,0,0.5);"/>
+    
+  </div></h2>
+    <p><strong>Título:</strong> Romeu e Julieta</p>
+    <p><strong>Realizador:</strong>  Joana Linda</p>
+    <p><strong>Ano:</strong> 2014</p>
+    <p><strong>Sinopse:</strong> Uma adaptação não-integral do clássico de Shakespeare que, com um elenco inteiramente feminino, pretende ao mesmo tempo anular a questão do género e questionar o papel da mulher na arte enquanto musa e criadora. A ação, que se desenrola num espaço físico e temporal incerto, acentuará o caráter predestinado das vidas de Romeu e Julieta, assim como as semelhanças entre as famílias rivais. De que modo se gere o conﬂito entre as esperanças e heranças familiares e as convicções e ambições pessoais? O amor implica escolhas ou é uma emoção completamente destituída de razão? Num delicado limbo entre a vida e a morte, a ideia de perda adensa-se até submergir e sufocar todas as outras emoções.</p>
+    <p><strong>Elenco:</strong> Ágata Pinho, Anabela Moreira, Cláudia Efe, Caroline Dawson, Diana Nicolau, Filipa Matta, Katrin Kaasa, Maria João Pinho, Miriam Santos, Patrícia Andrade, Patricia Couveiro, Paula Garcia, Priscilla Devesa, Sara Graça, Sofia Arriscado, Sónia Balacó, Sónia Baptista, Suspiria Franklyn, Tânia Alves, Teresa Coutinho, Vanda Cerejo</p>
+  </div>
+
+</div>
+   <!-- Fotografias -->
+    <div class="section">
+      <div class="fotos" id="galeria"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+  
+// Chame as funções com os parâmetros desejados
+setBackground("capa.png");
+setGaleria(8,"jpg"); // 5 fotos com extensão .png</script>
+
+</body>
+</html>
