@@ -108,9 +108,9 @@ function setGaleria(numFotos, extensao) {
   }
 }
 
- const video = document.getElementById("meuVideo");
-  
+document.addEventListener("DOMContentLoaded", function() {
+  const video = document.getElementById("meuVideo");
   video.addEventListener("ended", function() {
-    video.load(); // recarrega o vídeo e mostra o poster
+    video.load();
   });
-
+});
