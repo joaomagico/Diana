@@ -1,67 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Diana Reel - Online Aleatórias</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
+    :root { --gap: 1rem; --radius: 16px; --shadow: 0 6px 20px rgba(0,0,0,.12); }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial; background:#0f1115; color:#e8e8e8; }
+    header { padding: 2rem 1rem 1rem; text-align: center; }
+    h1 { margin: 0 0 .25rem; font-weight: 700; font-size: clamp(1.4rem, 2vw + .5rem, 2rem); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; }
+    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; color:#b9c0d4; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--gap); }
+
+    .card { display: block; background: #171a22; border: 1px solid #1f2430; border-radius: var(--radius); text-decoration: none; color: inherit; box-shadow: var(--shadow); overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
+    .card:hover { transform: translateY(-4px); border-color:#2e6fff55; box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+    .card:focus-visible { outline: none; box-shadow: 0 0 0 3px #2e6fff55, var(--shadow); }
+
+    .thumb { position: relative; aspect-ratio: 16/10; width: 100%; background: radial-gradient(80% 80% at 50% 20%, #1a2130 0%, #0e1118 70%); overflow: hidden; }
+    .thumb::after { content:""; position:absolute; inset:0; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), inset 0 -30px 40px rgba(0,0,0,.25); pointer-events:none; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transform: translateZ(0); will-change: transform, filter; transition: transform .45s ease, filter .3s ease; }
+    .card:hover .thumb img { transform: scale(1.06); filter: saturate(1.05) contrast(1.02); }
+
+    .title { padding: .9rem .95rem 1.05rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing:.01em; }
+
+    .placeholder { width: 100%; height: 100%; display: grid; place-items: center; color:#8e98ad; font-size: .9rem; background: linear-gradient(135deg,#141923 0%,#151c26 40%,#1a2333 100%); position: relative; overflow: hidden; }
+    .placeholder::before {
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.07) 50%, transparent 100%);
+      transform: translateX(-100%); animation: shimmer 1.8s infinite;
     }
-    h1 {
-      margin-bottom: 40px;
-    }
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-    }
-    img {
-      max-width: 90%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    }
+    @keyframes shimmer { 100% { transform: translateX(100%); } }
+
+    footer { opacity:.6; font-size:.85rem; text-align:center; padding: 1rem 0 2rem; }
   </style>
 </head>
 <body>
+<header><h1>Portfolio</h1></header>
+<main class="wrap" id="app"></main>
 
-  <h1>Diana</h1>
-  <div class="gallery" id="gallery"></div>
+<script>
+  const grupos = [
+    {
+      nome: "Filmes",
+      pastas: [
+        "O que ha de novo no amor",
+        "Imortal",
+        "A Morte de Carlos Gardel",
+        "Avaliacao",
+        "E amanha",
+        "Luto Branco",
+        "Couples",
+        "Plano de Fuga",
+        "Flumen",
+        "Ilhas do Triangulo",
+        "Curral"
+      ]
+    },
+    {
+      nome: "Teatro",
+      pastas: [
+	  // "Teatro/Alice",
+	  //"Teatro/MIDSUMMER'S NIGHT DREAM", 
+        "Teatro/O Pelicano",
+        "Teatro/E nao se pode extermina-lo",
+	   //"Teatro/Seattle",
+        "Teatro/Ernesto",
+        "Teatro/Romeu e Julieta",
+        "Teatro/Esperando Diana",
+        "Teatro/Tudo bem",
+        "Teatro/As Raposas",
+        "Teatro/Vou levar-te comigo",
+        "Teatro/Uma casa de bonecas",
+        "Teatro/Desconfortavel",
+        "Teatro/Swing"
+      ]
+    },
+    {
+      nome: "TV",
+      pastas: [
+        //"TV/Ilha dos amores",
+        //"TV/Deixa que te leve",
+        //"TV/Morangos",
+        //"TV/LoveIt",
+        //"TV/Mar salgado",
+        //"TV/Para Sempre",
+        "TV/Queridos papas",
+        "TV/Vizinhos",
+        "TV/Novas Narrativas",
+        "TV/Salto de fe",
+        "TV/FELP"
+      ]
+    }
+  ];
 
-  <script>
-    // Lista de exemplos de imagens online (Unsplash)
-    const imagensOnline = [
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=900",
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=900",
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=900",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900",
-      "https://images.unsplash.com/photo-1465101178521-c1a2b0b0a0b2?w=900",
-      "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?w=900",
-      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=900"
-    ];
+  // Fallback: capa.jpg -> capa.png -> placeholder (com lazy/async e sizes)
+  function capaComFallback(path) {
+    const img = new Image();
+    const exts = ["jpg","png"];
+    let i = 0;
+    img.alt = `Capa de ${path.split('/').pop()}`;
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.fetchPriority = "low";
+    img.sizes = "(min-width: 1100px) 240px, (min-width: 700px) 33vw, 50vw";
 
-    // Função para buscar 3 imagens aleatórias
-    function getRandomImages(arr, num) {
-      const shuffled = arr.sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, num);
+    img.src = encodeURI(`${path}/capa.${exts[i]}`);
+    img.onerror = function () {
+      i++;
+      if (i < exts.length) {
+        img.src = encodeURI(`${path}/capa.${exts[i]}`);
+      } else {
+        const ph = document.createElement("div");
+        ph.className = "placeholder";
+        ph.textContent = "sem capa";
+        img.replaceWith(ph);
+      }
+    };
+    return img;
+  }
+
+  function criarCard(path) {
+    const a = document.createElement("a");
+    a.className = "card";
+
+    const lower = path.toLowerCase();
+    if (
+      !lower.includes("novas narrativas") &&
+      !lower.includes("para sempre") &&
+      !lower.includes("morango") &&
+      !lower.includes("mar salgado") &&
+      !lower.includes("loveit") &&
+      !lower.includes("pelicano") &&
+      !lower.includes("extermina") &&
+      !lower.includes("deixa que te leve") &&
+      !lower.includes("ilha dos amores")
+    ) {
+      a.href = encodeURI(`${path}/index.html?token=abc123`);
     }
 
-    const aleatorias = getRandomImages(imagensOnline, 3);
+    const thumb = document.createElement("div");
+    thumb.className = "thumb";
+    thumb.appendChild(capaComFallback(path));
 
-    let galleryHtml = '';
-    aleatorias.forEach(url => {
-      galleryHtml += `<img src="${url}" alt="Foto aleatória">`;
-    });
+    const title = document.createElement("div");
+    title.className = "title";
+    title.textContent = path.split("/").pop();
 
-    document.getElementById("gallery").innerHTML = galleryHtml;
-  </script>
+    a.appendChild(thumb);
+    a.appendChild(title);
+    return a;
+  }
 
+  const app = document.getElementById("app");
+  grupos.forEach(grupo => {
+    const h2 = document.createElement("h2");
+    h2.textContent = grupo.nome;
+    const grid = document.createElement("section");
+    grid.className = "grid";
+    grupo.pastas.forEach(p => grid.appendChild(criarCard(p)));
+    app.appendChild(h2);
+    app.appendChild(grid);
+  });
+</script>
 </body>
 </html>
