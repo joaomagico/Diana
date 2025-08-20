@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>—</title>
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root{
+      --bg:#000; --card:#0b0b0b; --text:#e8eef6; --muted:#7f8a97; --accent:#6ae2b9;
+    }
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      overflow:hidden;
+    }
+    /* Vignette + grain */
+    body::before, body::after{
+      content:""; position:fixed; inset:0; pointer-events:none;
+    }
+    body::before{
+      background:radial-gradient(1200px 700px at 50% 40%, rgba(106,226,185,.08), transparent 60%),
+                 radial-gradient(700px 500px at 20% 80%, rgba(106,226,185,.05), transparent 60%);
+      mix-blend-mode:screen;
+    }
+    body::after{
+      background:
+        radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(0,0,0,.55) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
+      opacity:.85;
+    }
+
+    .wrap{min-height:100%; display:grid; place-items:center; padding:24px}
+    .card{
+      max-width:820px; width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid color-mix(in oklab, var(--muted), transparent 70%);
+      border-radius:22px; padding:36px 30px 40px;
+      box-shadow:0 25px 60px rgba(0,0,0,.65), inset 0 0 40px rgba(106,226,185,.03);
+      backdrop-filter: blur(6px);
+      position:relative;
+    }
+    .card::before{
+      content:""; position:absolute; inset:-1px;
+      border-radius:inherit;
+      background:conic-gradient(from 220deg, transparent 0 60%, rgba(106,226,185,.15), transparent 80% 100%);
+      filter:blur(12px); opacity:.6; z-index:-1;
+    }
+
+    .date{
+      font-size:13px; color:var(--muted); letter-spacing:.3px;
+      text-transform:uppercase; opacity:.85;
+    }
+    blockquote{
+      margin:12px 0 0; font-size:clamp(22px,3.2vw,30px); font-weight:600;
+      line-height:1.25; letter-spacing:.2px;
+      text-shadow:0 0 12px rgba(106,226,185,.08);
+    }
+    .cursor{
+      display:inline-block; width:.6ch; translate:0 .08em;
+      border-bottom:2px solid var(--accent); margin-left:.2ch;
+      animation:blink 1.3s steps(1) infinite;
+    }
+    @keyframes blink{50%{opacity:0}}
+
+    /* subtle float */
+    .float{animation:float 8s ease-in-out infinite}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
+
+    .hint{
+      margin-top:18px; color:var(--muted); font-size:14px;
+      opacity:.85;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card float" aria-live="polite">
+      <div class="date" id="date"></div>
+      <blockquote id="phrase">Carregar<span class="cursor"></span></blockquote>
+      <div class="hint" id="hint" aria-hidden="true"></div>
+    </main>
+  </div>
+
+  <script>
+    const PHRASES = [
+      "Cada personagem que encarnas traz consigo um pedaço da tua coragem.",
+"Não tens medo de entrar no desconforto, e é aí que brilhas mais.",
+"O público vê-te como atriz, mas quem olha com atenção vê humanidade.",
+"Cada desafio que aceitas revela a tua coragem e autenticidade.",
+"Tens a ousadia de arriscar e a serenidade de confiar em ti mesma.",
+"A tua arte é reflexo da tua coragem de ser inteira.",
+"Mostras que ser artista é também ser humano por inteiro.",
+"És chama que inspira confiança e calor.",
+"Cada papel é um reflexo da tua alma corajosa.",
+"A tua presença é sempre um presente para quem vê.",
+"A tua autenticidade faz-te única.",
+"És ponte entre arte e emoção.",
+"A tua humanidade é a tua marca mais bonita.",
+"Ontem tudo o que eu queria era subir ao teu ego, passar no teu medo e sem olhar o teu corpo",
+"És a aventura constante de ser tu mesma.",
+"Por força do que é teu és tudo o que eu vejo.",
+"A tua voz ecoa para além do palco.",
+"A tua coragem inspira mais do que consegues imaginar.",
+"És prova de que acreditar compensa.",
+"És abraço transformado em presença.",
+"A tua independência é inspiradora, nunca deixes de ser tu mesma.",
+"A tua independência é o sorriso mais bonito que ja vi.",
+"Uso a minha liberdade para ser quem eu quiser.",
+"Aprendi a amar-me e a encarar o medo. Nada me vai parar!",
+"Tu és dona de toda a força que precisas. o medo não te define.",
+"Muda o cabelo, a morada. Muda o que precisares! Só não mudes a tua essência.",
+"Eu não quero dominar o mundo. Procuro apenas a minha melhor versão.",
+"Nada que eu aceite sobre mim pode ser usado contra mim para me diminuir.",
+"Estou pronta para pagar o preço por ser uma mulher forte. Dá o nome que quiseres à minha determinação.",
+"Sigo a minha intuição, realizo os meus sonhos e valorizo a mulher que me tornei.",
+"Desculpa se te chamei bonita antes de dizer que é a tua coragem que mais gosto.",
+"Que nada nos defina, que nada nos sujeite. Que a liberdade seja a nossa própria substância.",
+"Não chegaste até aqui para desistires agora.",
+"Antes da tua beleza, é de ti que eu gosto",
+"Acordei incrível, igual todos os dias. Que orgulho de mim!",
+"Baby girl, don’t play about you. This version of you? She’s proof of the work, the healing, the glow-up. Protect her, love her, hype her.",
+"Women like you don't happen often. NEver forget how rare you are.",
+"Dear me in 6 months, I will make you fucking proud.",
+"Having a vagina doesn't stop me from believing that my balls are bigger than yours.",
+"Girl, if people don't match your vibe, change the people, not the vibe."
+    ];
+
+    const HINTS = [
+      
+    ];
+
+    function randomItem(arr){ return arr[Math.floor(Math.random() * arr.length)] }
+
+    function formatDatePT(d){
+      return new Intl.DateTimeFormat(document.documentElement.lang || 'pt-PT', {
+        weekday: 'long', day: '2-digit', month: 'long'
+      }).format(d);
+    }
+
+    (function init(){
+      const today = new Date();
+      const outPhrase = document.getElementById('phrase');
+      const outDate = document.getElementById('date');
+      const outHint = document.getElementById('hint');
+
+      outPhrase.textContent = randomItem(PHRASES);
+      outDate.textContent = formatDatePT(today);
+      outHint.textContent = randomItem(HINTS);
+    })();
+  </script>
+</body>
+</html>
