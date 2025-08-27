@@ -7,7 +7,14 @@
   <style>
     :root { --gap: 1rem; --radius: 16px; --shadow: 0 6px 20px rgba(0,0,0,.12); }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial; background:#0f1115; color:#e8e8e8; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+      background: linear-gradient(135deg, #0f1115 0%, #141821 40%, #0d111a 100%);
+      color:#e8e8e8;
+      min-height: 100vh;
+      background-attachment: fixed;
+    }
     header { padding: 2rem 1rem 1rem; text-align: center; }
     h1 { margin: 0 0 .25rem; font-weight: 700; font-size: clamp(1.4rem, 2vw + .5rem, 2rem); }
     .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; }
@@ -22,6 +29,7 @@
     .thumb { position: relative; aspect-ratio: 16/10; width: 100%; background: radial-gradient(80% 80% at 50% 20%, #1a2130 0%, #0e1118 70%); overflow: hidden; }
     .thumb::after { content:""; position:absolute; inset:0; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), inset 0 -30px 40px rgba(0,0,0,.25); pointer-events:none; }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transform: translateZ(0); will-change: transform, filter; transition: transform .45s ease, filter .3s ease; }
+	
     .card:hover .thumb img { transform: scale(1.06); filter: saturate(1.05) contrast(1.02); }
 
     .title { padding: .9rem .95rem 1.05rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing:.01em; }
@@ -34,8 +42,25 @@
     }
     @keyframes shimmer { 100% { transform: translateX(100%); } }
 
+    /* Reflexo aleatório */
+    .reflect::after {
+      content:"";
+      position: absolute;
+      bottom: -45%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      transform: scaleY(-1);
+      opacity: .15;
+      filter: blur(3px);
+      pointer-events: none;
+    }
+
     footer { opacity:.6; font-size:.85rem; text-align:center; padding: 1rem 0 2rem; }
   </style>
+  
+  <script src="token-check.js"></script>
 </head>
 <body>
 <header><h1>Portfolio</h1></header>
@@ -46,7 +71,7 @@
     {
       nome: "Filmes",
       pastas: [
-        "O que ha de novo no amor",
+        "o que ha de novo no amor",
         "Imortal",
         "A Morte de Carlos Gardel",
         "Avaliacao",
@@ -62,15 +87,12 @@
     {
       nome: "Teatro",
       pastas: [
-	  // "Teatro/Alice",
-	  //"Teatro/MIDSUMMER'S NIGHT DREAM", 
         "Teatro/O Pelicano",
-        "Teatro/E nao se pode extermina-lo",
-	   //"Teatro/Seattle",
+        "Teatro/e nao se pode extermina-lo",
         "Teatro/Ernesto",
         "Teatro/Romeu e Julieta",
         "Teatro/Esperando Diana",
-        "Teatro/Tudo bem",
+        "Teatro/tudo bem",
         "Teatro/As Raposas",
         "Teatro/Vou levar-te comigo",
         "Teatro/Uma casa de bonecas",
@@ -81,12 +103,9 @@
     {
       nome: "TV",
       pastas: [
-        //"TV/Ilha dos amores",
-        //"TV/Deixa que te leve",
-        //"TV/Morangos",
-        //"TV/LoveIt",
-        //"TV/Mar salgado",
-        //"TV/Para Sempre",
+        "TV/Ilha dos amores",
+        "TV/Deixa que te leve",
+        "TV/Para Sempre",
         "TV/Queridos papas",
         "TV/Vizinhos",
         "TV/Novas Narrativas",
@@ -96,7 +115,6 @@
     }
   ];
 
-  // Fallback: capa.jpg -> capa.png -> placeholder (com lazy/async e sizes)
   function capaComFallback(path) {
     const img = new Image();
     const exts = ["jpg","png"];
@@ -143,6 +161,12 @@
 
     const thumb = document.createElement("div");
     thumb.className = "thumb";
+
+    // reflexo aleatório
+    if (Math.random() > 0.5) {
+      thumb.classList.add("reflect");
+    }
+
     thumb.appendChild(capaComFallback(path));
 
     const title = document.createElement("div");
