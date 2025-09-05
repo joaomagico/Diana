@@ -1,196 +1,94 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio</title>
+  <title>Links</title>
+  <meta name="color-scheme" content="dark">
   <style>
-    :root { --gap: 1rem; --radius: 16px; --shadow: 0 6px 20px rgba(0,0,0,.12); }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
-      background: linear-gradient(135deg, #0f1115 0%, #141821 40%, #0d111a 100%);
-      color:#e8e8e8;
-      min-height: 100vh;
-      background-attachment: fixed;
+    :root{
+      --bg:#000; --card:#0b0b0b; --text:#e8eef6; --muted:#7f8a97; --accent:#6ae2b9;
     }
-    header { padding: 2rem 1rem 1rem; text-align: center; }
-    h1 { margin: 0 0 .25rem; font-weight: 700; font-size: clamp(1.4rem, 2vw + .5rem, 2rem); }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 1rem 3rem; }
-    h2 { margin: 2rem 0 1rem; font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; color:#b9c0d4; }
-
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--gap); }
-
-    .card { display: block; background: #171a22; border: 1px solid #1f2430; border-radius: var(--radius); text-decoration: none; color: inherit; box-shadow: var(--shadow); overflow: hidden; transition: transform .25s, box-shadow .25s, border-color .25s; }
-    .card:hover { transform: translateY(-4px); border-color:#2e6fff55; box-shadow: 0 12px 30px rgba(0,0,0,.2); }
-    .card:focus-visible { outline: none; box-shadow: 0 0 0 3px #2e6fff55, var(--shadow); }
-
-    .thumb { position: relative; aspect-ratio: 16/10; width: 100%; background: radial-gradient(80% 80% at 50% 20%, #1a2130 0%, #0e1118 70%); overflow: hidden; }
-    .thumb::after { content:""; position:absolute; inset:0; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), inset 0 -30px 40px rgba(0,0,0,.25); pointer-events:none; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transform: translateZ(0); will-change: transform, filter; transition: transform .45s ease, filter .3s ease; }
-	
-    .card:hover .thumb img { transform: scale(1.06); filter: saturate(1.05) contrast(1.02); }
-
-    .title { padding: .9rem .95rem 1.05rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing:.01em; }
-
-    .placeholder { width: 100%; height: 100%; display: grid; place-items: center; color:#8e98ad; font-size: .9rem; background: linear-gradient(135deg,#141923 0%,#151c26 40%,#1a2333 100%); position: relative; overflow: hidden; }
-    .placeholder::before {
-      content:""; position:absolute; inset:0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.07) 50%, transparent 100%);
-      transform: translateX(-100%); animation: shimmer 1.8s infinite;
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      overflow:hidden;
     }
-    @keyframes shimmer { 100% { transform: translateX(100%); } }
-
-    /* Reflexo aleatório */
-    .reflect::after {
-      content:"";
-      position: absolute;
-      bottom: -45%;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: inherit;
-      transform: scaleY(-1);
-      opacity: .15;
-      filter: blur(3px);
-      pointer-events: none;
+    /* Vignette + grain */
+    body::before, body::after{
+      content:""; position:fixed; inset:0; pointer-events:none;
+    }
+    body::before{
+      background:radial-gradient(1200px 700px at 50% 40%, rgba(106,226,185,.08), transparent 60%),
+                 radial-gradient(700px 500px at 20% 80%, rgba(106,226,185,.05), transparent 60%);
+      mix-blend-mode:screen;
+    }
+    body::after{
+      background:
+        radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(0,0,0,.55) 100%),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
+      opacity:.85;
     }
 
-    footer { opacity:.6; font-size:.85rem; text-align:center; padding: 1rem 0 2rem; }
+    .wrap{min-height:100%; display:grid; place-items:center; padding:24px}
+    .card{
+      max-width:600px; width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid color-mix(in oklab, var(--muted), transparent 70%);
+      border-radius:22px; padding:40px 32px;
+      box-shadow:0 25px 60px rgba(0,0,0,.65), inset 0 0 40px rgba(106,226,185,.03);
+      backdrop-filter: blur(6px);
+      position:relative; text-align:center;
+    }
+    .card::before{
+      content:""; position:absolute; inset:-1px;
+      border-radius:inherit;
+      background:conic-gradient(from 220deg, transparent 0 60%, rgba(106,226,185,.15), transparent 80% 100%);
+      filter:blur(12px); opacity:.6; z-index:-1;
+    }
+
+    h1{
+      font-size:clamp(22px,3.2vw,28px); margin:0 0 24px;
+      text-shadow:0 0 12px rgba(106,226,185,.08);
+    }
+
+    .links{
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .links a{
+      display:block; padding:14px 20px;
+      background:rgba(255,255,255,.02);
+      border:1px solid color-mix(in oklab, var(--muted), transparent 65%);
+      border-radius:14px;
+      color:var(--text); text-decoration:none;
+      font-weight:500; font-size:17px;
+      transition:.25s;
+    }
+    .links a:hover{
+      border-color:var(--accent); color:var(--accent);
+      background:rgba(106,226,185,.08);
+      transform:translateY(-2px);
+    }
+
+    /* subtle float */
+    .float{animation:float 8s ease-in-out infinite}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
   </style>
-  
-  <script src="token-check.js"></script>
 </head>
 <body>
-<header><h1>Portfolio</h1></header>
-<main class="wrap" id="app"></main>
-
-<script>
-  const grupos = [
-    {
-      nome: "Filmes",
-      pastas: [
-        "o que ha de novo no amor",
-        "Imortal",
-        "A Morte de Carlos Gardel",
-        "Avaliacao",
-        "E amanha",
-        "Luto Branco",
-        "Couples",
-        "Plano de Fuga",
-        "Flumen",
-        "Ilhas do Triangulo",
-        "Curral"
-      ]
-    },
-    {
-      nome: "Teatro",
-      pastas: [
-        "Teatro/O Pelicano",
-        "Teatro/e nao se pode extermina-lo",
-        "Teatro/Ernesto",
-        "Teatro/Romeu e Julieta",
-        "Teatro/Esperando Diana",
-        "Teatro/tudo bem",
-        "Teatro/As Raposas",
-        "Teatro/Vou levar-te comigo",
-        "Teatro/Uma casa de bonecas",
-        "Teatro/Desconfortavel",
-        "Teatro/Swing"
-      ]
-    },
-    {
-      nome: "TV",
-      pastas: [
-        //"TV/Ilha dos amores",
-        //"TV/Deixa que te leve",
-        //"TV/Morangos",
-        //"TV/LoveIt",
-        //"TV/Mar salgado",
-        //"TV/Para Sempre",
-        "TV/Queridos papas",
-        "TV/Vizinhos",
-        "TV/Novas Narrativas",
-        "TV/Salto de fe",
-        "TV/FELP"
-      ]
-    }
-  ];
-
-  function capaComFallback(path) {
-    const img = new Image();
-    const exts = ["jpg","png"];
-    let i = 0;
-    img.alt = `Capa de ${path.split('/').pop()}`;
-    img.loading = "lazy";
-    img.decoding = "async";
-    img.fetchPriority = "low";
-    img.sizes = "(min-width: 1100px) 240px, (min-width: 700px) 33vw, 50vw";
-
-    img.src = encodeURI(`${path}/capa.${exts[i]}`);
-    img.onerror = function () {
-      i++;
-      if (i < exts.length) {
-        img.src = encodeURI(`${path}/capa.${exts[i]}`);
-      } else {
-        const ph = document.createElement("div");
-        ph.className = "placeholder";
-        ph.textContent = "sem capa";
-        img.replaceWith(ph);
-      }
-    };
-    return img;
-  }
-
-  function criarCard(path) {
-    const a = document.createElement("a");
-    a.className = "card";
-
-    const lower = path.toLowerCase();
-    if (
-      !lower.includes("novas narrativas") &&
-      !lower.includes("para sempre") &&
-      !lower.includes("morango") &&
-      !lower.includes("mar salgado") &&
-      !lower.includes("loveit") &&
-      !lower.includes("pelicano") &&
-      !lower.includes("extermina") &&
-      !lower.includes("deixa que te leve") &&
-      !lower.includes("ilha dos amores")
-    ) {
-      a.href = encodeURI(`${path}/index.html?token=abc123`);
-    }
-
-    const thumb = document.createElement("div");
-    thumb.className = "thumb";
-
-    // reflexo aleatório
-    if (Math.random() > 0.5) {
-      thumb.classList.add("reflect");
-    }
-
-    thumb.appendChild(capaComFallback(path));
-
-    const title = document.createElement("div");
-    title.className = "title";
-    title.textContent = path.split("/").pop();
-
-    a.appendChild(thumb);
-    a.appendChild(title);
-    return a;
-  }
-
-  const app = document.getElementById("app");
-  grupos.forEach(grupo => {
-    const h2 = document.createElement("h2");
-    h2.textContent = grupo.nome;
-    const grid = document.createElement("section");
-    grid.className = "grid";
-    grupo.pastas.forEach(p => grid.appendChild(criarCard(p)));
-    app.appendChild(h2);
-    app.appendChild(grid);
-  });
-</script>
+  <div class="wrap">
+    <main class="card float">
+      <h1>Diana</h1>
+      <nav class="links">
+        <a href="port.html?token=abc123">Portfolio</a>
+        <a href="quote.html?token=abc123">Quotes</a>
+        <a href="sound.html?token=abc123">Valentine</a>
+      </nav>
+    </main>
+  </div>
 </body>
 </html>

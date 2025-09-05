@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>—</title>
+  <title>Sorri</title>
   <meta name="color-scheme" content="dark">
   <style>
     :root{
@@ -127,7 +127,7 @@
 "Women like you don't happen often. Never forget how rare you are.| Para ti",
 "Dear me in 6 months, I will make you fucking proud.| Para ti",
 "Having a vagina doesn't stop me from believing that my balls are bigger than yours.| Para ti",
-"Um dia faço 1000Km para te abraçar.| João",
+"Um dia faço 1000Km para estar contigo.| João",
 "Always remember someone's effort is a reflection of their interest in you| Para ti",
 "Sometimes you don't need to hear their excuses because their actions already spoke the truth| Para ti",
 "You know what is attractive? Effort| Para ti",
@@ -137,7 +137,11 @@
 "If it makes you happy it's never a waste of time| Para ti",
 "Half of her beauty is her brain| Para ti",      
 "És a minha notificação favorita! Acredita que és.| João",
-"Belive in yourself because you're fucking amazing| Para ti"
+"Belive in yourself because you're fucking amazing| Para ti",
+"Gostava que visses o que os meus olhos vêem quando te vejo. | João",
+"Queria provocar um sorriso na tua cara todos os dias. | João",
+"Tenho tanto orgulho em ti. | João",
+"O que desconheço em ti atrai-me.| João"
     ];
 
 function randomIndexNoRepeat(len, storageKey) {
@@ -176,7 +180,12 @@ function formatDatePT(d){
   const [frase, extra] = chosen.split("|").map(s => s.trim());
 
   outPhrase.textContent = frase;
-  outHint.textContent   = extra;
+  if(extra === "João"){
+  outHint.innerHTML = '<a href="https://www.instagram.com/direct/t/joaomendesmagico" target="_blank" style="color:var(--accent);text-decoration:none">João</a>';
+}else{
+  outHint.textContent = extra;
+}
+
   outDate.textContent   = formatDatePT(today);
 })();
 </script>
