@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>I AM VALENTINE</title>
+  <title>Sound Track</title>
   <style>
     :root{
       --bg:#000; --card:#0b0b0b; --text:#e8eef6; --muted:#7f8a97; --accent:#6ae2b9;
@@ -11,21 +11,17 @@
     body{
       margin:0; background:var(--bg); color:var(--text);
       font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      overflow:hidden; cursor:pointer;
+      overflow:hidden;
     }
-    /* Vignette + grain */
-    body::before, body::after{
-      content:""; position:fixed; inset:0; pointer-events:none;
-    }
+    body::before, body::after{content:""; position:fixed; inset:0; pointer-events:none;}
     body::before{
       background:radial-gradient(1200px 700px at 50% 40%, rgba(106,226,185,.08), transparent 60%),
                  radial-gradient(700px 500px at 20% 80%, rgba(106,226,185,.05), transparent 60%);
       mix-blend-mode:screen;
     }
     body::after{
-      background:
-        radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(0,0,0,.55) 100%),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
+      background:radial-gradient(120% 120% at 50% 40%, transparent 60%, rgba(0,0,0,.55) 100%),
+                 repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px);
       opacity:.85;
     }
 
@@ -45,11 +41,7 @@
       background:conic-gradient(from 220deg, transparent 0 60%, rgba(106,226,185,.15), transparent 80% 100%);
       filter:blur(12px); opacity:.6; z-index:-1;
     }
-
-    .date{
-      font-size:13px; color:var(--muted); letter-spacing:.3px;
-      text-transform:uppercase; opacity:.85;
-    }
+    .date{font-size:13px; color:var(--muted); letter-spacing:.3px; text-transform:uppercase; opacity:.85;}
     blockquote{
       margin:12px 0 0; font-size:clamp(22px,3.2vw,30px); font-weight:600;
       line-height:1.25; letter-spacing:.2px;
@@ -61,18 +53,16 @@
       animation:blink 1.3s steps(1) infinite;
     }
     @keyframes blink{50%{opacity:0}}
-
-    /* subtle float */
     .float{animation:float 8s ease-in-out infinite}
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-6px)}
-    }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .hint{margin-top:18px; color:var(--muted); font-size:14px; opacity:.85;}
 
-    .hint{
-      margin-top:18px; color:var(--muted); font-size:14px;
-      opacity:.85;
+    /* Divisão da página */
+    .top, .bottom {
+      position:absolute; left:0; right:0; height:50%;
     }
+    .top { top:0; }
+    .bottom { bottom:0; }
   </style>
 </head>
 <body>
@@ -84,20 +74,65 @@
     </div>
   </div>
 
-  <audio id="musica" src="I AM VALENTINE.mp3"></audio>
+  <!-- Áreas clicáveis -->
+  <div class="top"></div>
+  <div class="bottom"></div>
+
+  <!-- Players invisíveis -->
+  <div id="player1" style="width:0;height:0;overflow:hidden;"></div>
+  <div id="player2" style="width:0;height:0;overflow:hidden;"></div>
 
   <script>
-  
-    const musica = document.getElementById("musica");
+    let player1, player2;
+    let ready1 = false, ready2 = false;
+    let playing1 = false, playing2 = false;
+
     const msg = document.getElementById("msg");
 
-    document.body.addEventListener("click", () => {
-      if (musica.paused) {
-        musica.play();
+    // carregar API YouTube
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
+
+    function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player("player1", {
+        videoId: "fdZXWkQxBrI", // vídeo de cima
+        playerVars: { autoplay: 0, controls: 0 },
+        events: { onReady: () => { ready1 = true; } }
+      });
+
+      player2 = new YT.Player("player2", {
+        videoId: "HcRWjldsxxs", // vídeo de baixo
+        playerVars: { autoplay: 0, controls: 0 },
+        events: { onReady: () => { ready2 = true; } }
+      });
+    }
+
+    document.querySelector(".top").addEventListener("click", () => {
+      if (!ready1) return;
+      if (!playing1) {
+        if (playing2) { player2.pauseVideo(); playing2 = false; }
+        player1.playVideo();
         msg.textContent = "⏸";
-      } else {               
-        musica.pause();      
+        playing1 = true;
+      } else {
+        player1.pauseVideo();
         msg.textContent = "▶";
+        playing1 = false;
+      }
+    });
+
+    document.querySelector(".bottom").addEventListener("click", () => {
+      if (!ready2) return;
+      if (!playing2) {
+        if (playing1) { player1.pauseVideo(); playing1 = false; }
+        player2.playVideo();
+        msg.textContent = "⏸";
+        playing2 = true;
+      } else {
+        player2.pauseVideo();
+        msg.textContent = "▶";
+        playing2 = false;
       }
     });
   </script>
