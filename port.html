@@ -6,6 +6,32 @@
   <title>Portfolio – Diana</title>
   <meta name="color-scheme" content="dark">
   <style>
+  .home-wrap {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 30;
+}
+
+.home-btn {
+  display:block; padding:10px 16px;
+  background:rgba(255,255,255,.02);
+  border:1px solid color-mix(in oklab, var(--muted), transparent 65%);
+  border-radius:12px;
+  color:var(--text); text-decoration:none;
+  font-weight:500; font-size:15px;
+  transition:.25s;
+  opacity:.7;
+}
+.home-btn:hover,
+.home-btn:active {
+  border-color:var(--accent);
+  color:var(--accent);
+  background:rgba(106,226,185,.08);
+  transform:translateY(-2px);
+  opacity:1;
+}
+
     :root{
       --bg:#000; --card:#0b0b0b; --text:#e8eef6; --muted:#7f8a97; --accent:#6ae2b9;
       --radius:18px;
@@ -49,7 +75,13 @@
       color:var(--muted); text-transform:uppercase;
     }
 
-    .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem}
+    .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* antes era 220px */
+  gap: 1.2rem; /* ligeiramente maior espaçamento */
+}
+
+
 
     .card{
       display:block; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
@@ -64,10 +96,14 @@
       box-shadow:0 20px 40px rgba(0,0,0,.55), inset 0 0 40px rgba(106,226,185,.04);
     }
 
-    .thumb{
-      position:relative; aspect-ratio:16/10; width:100%; overflow:hidden;
-      background:radial-gradient(80% 80% at 50% 20%, #1a2130 0%, #0e1118 70%);
-    }
+    .thumb {
+  position: relative;
+  aspect-ratio: 9/9; /* mais largo e moderno (antes 16/10) */
+  width: 100%;
+  overflow: hidden;
+  background: radial-gradient(80% 80% at 50% 20%, #1a2130 0%, #0e1118 70%);
+}
+
     .thumb::after{
       content:""; position:absolute; inset:0;
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.03), inset 0 -30px 40px rgba(0,0,0,.25);
@@ -153,7 +189,7 @@
        !lower.includes("loveit") && !lower.includes("pelicano") &&
        !lower.includes("extermina") && !lower.includes("deixa que te leve") &&
        !lower.includes("ilha dos amores")){
-      a.href=encodeURI(`${path}/index.html?token=abc123`);
+      a.href=encodeURI(`${path}/index.html?token=Q15qxgcvQImhc1uDYwUIycyK5L3D01AW5cihRTzr3ViTxuVVWv8F13soryEYcYHV`);
     }
     const thumb=document.createElement("div");
     thumb.className="thumb";
@@ -175,5 +211,8 @@
     app.appendChild(h2); app.appendChild(grid);
   });
 </script>
+<div class="home-wrap">
+  <a href="index.html?token=Q15qxgcvQImhc1uDYwUIycyK5L3D01AW5cihRTzr3ViTxuVVWv8F13soryEYcYHV" target="_blank" class="home-btn">Home</a>
+</div>
 </body>
 </html>
