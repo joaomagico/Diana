@@ -27,7 +27,7 @@
   <div style="flex: 1 1 300px; max-width: 500px; background: rgba(255, 255, 255, 0.05); padding: 25px 20px; border-radius: 12px; color: #ddd;">
     <h2 style="margin-top: 0; font-size: 1.4em; color: #ffcc66;">Sobre o Filme</h2>
     <p><strong>Título:</strong>A Morte de Carlos Gardel</p>
-    <p><strong>Realizador: Solveig Nordlund</strong> </p>
+    <p><strong>Realizador:</strong> Solveig Nordlund </p>
     <p><strong>Ano:</strong> 2011</p>
     <p><strong>Duração:</strong> 85  minutos</p>
     <p><strong>Sinopse:</strong> Nuno é um jovem toxicodependente em coma, a morrer num hospital.
@@ -43,14 +43,7 @@ Durante os dois dias em que se encontra entre a vida e a morte, cada um dos fami
       O seu navegador não suporta vídeo HTML5.
     </video>
   </div>
-  
-
 </div>
-
-
-  
-
-
     <!-- Fotografias -->
     <div class="section">
       <div id="galeria" style="
@@ -66,6 +59,13 @@ Durante os dois dias em que se encontra entre a vida e a morte, cada um dos fami
               display: flex; align-items: center; justify-content: center;
               box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
     <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Ver Reportagem</span>
+  </div>  
+  <div id="filmeWrapper"
+       style="position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9;
+              background: #000; border-radius: 12px;
+              display: flex; align-items: center; justify-content: center;
+              box-shadow: 0 0 25px rgba(0,0,0,0.5); cursor: pointer;">
+    <span style="font-size: 1.5rem; color: #ffcc66; font-weight: 600;">📽️ Ver filme</span>
   </div>
 </div>
 
@@ -95,6 +95,11 @@ wrapper.addEventListener("click", () => {
       O seu navegador não suporta vídeo HTML5.
     </video>
   `;
+});
+const wrapperFilme = document.getElementById("filmeWrapper");
+
+wrapperFilme.addEventListener("click", () => {
+  window.open("https://www.rtp.pt/play/p15552/e876674/a-morte-de-carlos-gardel", "_blank");
 });
 
   const imagens = Array.from({ length: 4}, (_, i) => `${i + 1}.jpg`);
