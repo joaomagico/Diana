@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
 // Função para configurar o fundo
 function setBackground(imagePath) {
   document.body.style.backgroundImage = `url('${imagePath}')`;
@@ -113,4 +114,5 @@ document.addEventListener("DOMContentLoaded", function() {
   video.addEventListener("ended", function() {
     video.load();
   });
+
 });
