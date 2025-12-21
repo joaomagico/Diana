@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="pt-PT">
+<script src="token-check.js"></script>
 
-  <script src="token-check.js"></script>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Links</title>
   <meta name="color-scheme" content="dark">
   <style>
-    :root{
+    :root {
       --bg:#000; --card:#0b0b0b; --text:#e8eef6; --muted:#7f8a97; --accent:#6ae2b9;
     }
     html,body{height:100%}
@@ -17,7 +17,6 @@
       font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       overflow:hidden;
     }
-    /* Vignette + grain */
     body::before, body::after{
       content:""; position:fixed; inset:0; pointer-events:none;
     }
@@ -73,15 +72,150 @@
       transform:translateY(-2px);
     }
 
-    /* subtle float */
     .float{animation:float 8s ease-in-out infinite}
     @keyframes float{
       0%,100%{transform:translateY(0)}
       50%{transform:translateY(-6px)}
     }
+
+    /* POPUP */
+    #popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      border: 1px solid #444;
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      width: 300px;
+      z-index: 9999;
+      display: none;
+    }
+    #popup img {
+      width: 100%; border-radius: 12px; margin-bottom: 16px;
+    }
+    #popup a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #000;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+    #popup button {
+      margin-top: 12px;
+      background: none;
+      color: var(--text);
+      border: 1px solid #444;
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+	#popup a {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 22px;
+  background: linear-gradient(135deg, #6ae2b9, #4fcfa5);
+  color: #000;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  box-shadow: 0 8px 20px rgba(106,226,185,.35);
+  transition: all .25s ease;
+}
+
+#popup a:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(106,226,185,.5);
+}
+
+#popup button {
+  margin-top: 14px;
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+#popup button:hover {
+  color: var(--accent);
+}
+
+#popup {
+  animation: fadeUp .5s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#popup a {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 13px 26px;
+  background: linear-gradient(135deg, #ffb703, #ff8fab);
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: .3px;
+  box-shadow: 0 10px 28px rgba(255, 143, 171, .45);
+  transition: all .25s ease;
+}
+
+#popup a:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 36px rgba(255, 183, 3, .55);
+}
+
+#popup button {
+  margin-top: 14px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+#popup button:hover {
+  color: #fff;
+}
+
+
+
+
   </style>
 </head>
+
 <body>
+
+  <!-- POPUP -->
+  <div id="popup">
+    
+    <p class="soft">Que a tua recuperação seja rápida.</p>
+	<p class="soft highlight">Não espero nada em troca, só que aceites este carinho.</p>
+    
+	<a href="gift.html">Ver presente 🎁</a>
+	<p class="soft mute">É só um esboço do que daria para fazer com bom material e com tempo </p>
+    <br>
+    <button onclick="document.getElementById('popup').style.display='none'">Fechar</button>
+  </div>
+
   <div class="wrap">
     <main class="card float">
       <h1>Diana</h1>
@@ -89,8 +223,17 @@
         <a href="port.html?token=Q15qxgcvQImhc1uDYwUIycyK5L3D01AW5cihRTzr3ViTxuVVWv8F13soryEYcYHV">Portfolio</a>
         <a href="quote.html?token=Q15qxgcvQImhc1uDYwUIycyK5L3D01AW5cihRTzr3ViTxuVVWv8F13soryEYcYHV">Quotes</a>
         <a href="sound.html?token=Q15qxgcvQImhc1uDYwUIycyK5L3D01AW5cihRTzr3ViTxuVVWv8F13soryEYcYHV">Sound</a>
+		<a id="japanButton" href="https://joaomagico.github.io/IrMaisLonge/website/gift.html?token=irmaislonge2025" >Ir mais Longe - Japão</a>
       </nav>
     </main>
   </div>
+
+<script>
+  window.onload = function () {
+    document.getElementById('popup').style.display = 'block';
+  };
+</script>
+
+
 </body>
 </html>
