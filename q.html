@@ -1,0 +1,75 @@
+
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <title>POC AR - Marker Hiro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- A-Frame + AR.js (CDNs estáveis) -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.5.0/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.5/aframe/build/aframe-ar.min.js"></script>
+    <style>
+      html, body { margin:0; height:100%; overflow:hidden; background:#000; }
+      .hint { position:fixed; top:10px; left:50%; transform:translateX(-50%);
+              color:#fff; font-family:system-ui, sans-serif; font-size:14px;
+              background:rgba(0,0,0,.5); padding:8px 12px; border-radius:8px; z-index:10; }
+      .error { position:fixed; bottom:10px; left:50%; transform:translateX(-50%);
+               color:#fff; font-family:system-ui, sans-serif; font-size:12px;
+               background:rgba(200,0,0,.75); padding:6px 10px; border-radius:6px; z-index:10; display:none; }
+    </style>
+  </head>
+  <body>
+    <div class="hint">Aponta para o marcador "Hiro". Autoriza a câmara.</div>
+    <div class="error" id="err"></div>
+
+    <a-scene
+      embedded
+      vr-mode-ui="enabled: false"
+      renderer="logarithmicDepthBuffer: true; antialias: true;"
+      arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false; facingMode: environment;"
+    >
+      <!-- Pré-carregar a imagem -->
+      <a-assets timeout="10000">
+        <img id="img1" crossorigin="anonymous"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/256px-React-icon.svg.png">
+      </a-assets>
+
+      <!-- Marcador Hiro padrão -->
+      <a-marker type="pattern"
+                url="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/three.js/examples/marker-training/examples/pattern-files/patt.hiro">
+        <!-- Plano com a imagem (deitado sobre o marcador) -->
+        <a-plane src="#img1"
+                 position="0 0 0"
+                 rotation="-90 0 0"
+                 width="1" height="1"
+                 material="transparent:true">
+        </a-plane>
+
+        <!-- Caixa 3D para referência de profundidade -->
+        <a-box position="0 0.5 0" depth="0.2" height="0.2" width="0.2" color="#4CC3D9"></a-box>
+      </a-marker>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+      // Mostrar erro visível se algo correr mal
+      function showErr(msg) {
+        const box = document.getElementById('err');
+        if (box) { box.textContent = msg; box.style.display = 'block'; }
+      }
+
+      // Erros globais
+      window.addEventListener('error', () => {
+        showErr('Erro a iniciar a câmara. Usa HTTPS e autoriza o acesso. Em iPhone usa Safari.');
+      });
+
+      // Erro específico de media devices
+      (async () => {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          showErr('Este browser não expõe a câmara a páginas web. Tenta Safari (iOS) ou Chrome (Android).');
+        }
+      })();
+    </script>
+  </body>
+</html>
